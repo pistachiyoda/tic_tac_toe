@@ -13,4 +13,11 @@ export class GameManager {
     this.board = new Board();
     this.isThreeInARow = false;
   }
+
+  changePlayer = () => {
+    this.currentPlayer =
+      this.currentPlayer === this.players[0]
+        ? this.players[1]
+        : this.players[0];
+  };
 }

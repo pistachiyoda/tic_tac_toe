@@ -1,20 +1,20 @@
 export class Block {
-  private _status: "○" | "×" | "";
-  private _position: position;
+  #status: "○" | "×" | "";
+  #position: position;
   constructor(position: position) {
-    this._status = "";
-    this._position = position;
+    this.#status = "";
+    this.#position = position;
   }
 
   changeStatus(status: "○" | "×" | "") {
-    this._status = status;
+    this.#status = status;
   }
 
   get status() {
-    return this._status;
+    return this.#status;
   }
 
   get position() {
-    return this._position;
+    return this.#position;
   }
 }

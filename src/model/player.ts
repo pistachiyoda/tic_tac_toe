@@ -1,19 +1,19 @@
 import { Board } from "./board.js";
 
 export class Player {
-  private _name: string;
-  private mark: "○" | "×";
+  #name: string;
+  #mark: "○" | "×";
 
   constructor(name: string, mark: "○" | "×") {
-    this._name = name;
-    this.mark = mark;
+    this.#name = name;
+    this.#mark = mark;
   }
 
   get name() {
-    return this._name;
+    return this.#name;
   }
 
   setMark = (position: position, board: Board) => {
-    board.getBlock(position).changeStatus(this.mark);
+    board.getBlock(position).changeStatus(this.#mark);
   };
 }
