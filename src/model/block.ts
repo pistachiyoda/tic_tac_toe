@@ -1,12 +1,12 @@
 export class Block {
-  #status: "○" | "×" | "";
+  #status: "○" | "x" | "";
   #position: position;
   constructor(position: position) {
     this.#status = "";
     this.#position = position;
   }
 
-  changeStatus(status: "○" | "×" | "") {
+  changeStatus(status: "○" | "x" | "") {
     this.#status = status;
   }
 

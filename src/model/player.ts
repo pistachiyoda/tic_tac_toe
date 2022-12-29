@@ -2,15 +2,19 @@ import { Board } from "./board.js";
 
 export class Player {
   #name: string;
-  #mark: "○" | "×";
+  #mark: "○" | "x";
 
-  constructor(name: string, mark: "○" | "×") {
+  constructor(name: string, mark: "○" | "x") {
     this.#name = name;
     this.#mark = mark;
   }
 
   get name() {
     return this.#name;
+  }
+
+  get mark() {
+    return this.#mark;
   }
 
   setMark = (position: position, board: Board) => {

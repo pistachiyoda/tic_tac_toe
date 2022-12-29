@@ -19,12 +19,11 @@ export class Board {
   }
 
   getBlock(position: position): Block {
-    const block = this.blocks.filter(
+    const block = this.blocks.find(
       (block) =>
         block.position.x === position.x && block.position.y === position.y
     );
-    if (block.length >= 2) throw new Error("該当ブロックが複数個あります");
-    if (block.length <= 0) throw new Error("該当ブロックがありません");
-    return block[0];
+    if (!block) throw new Error("該当ブロックがありません");
+    return block;
   }
 }

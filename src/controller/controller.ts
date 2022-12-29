@@ -1,15 +1,18 @@
 import { GameManager } from "../model/gameManeger.js";
-import { Render } from "../view/render.js";
+import { Renderer } from "../view/render.js";
 
 export class Controller {
   gamemaneger: GameManager;
-  render: Render;
+  render: Renderer;
 
   constructor() {
     this.gamemaneger = new GameManager();
-    this.render = new Render(this.gamemaneger);
-    this.render.displayName();
-    this.render.displayBoard(this.onClick, this.gamemaneger.board.blocks);
+    this.render = new Renderer();
+    this.render.renderName(
+      this.gamemaneger.currentPlayer.name,
+      this.gamemaneger.currentPlayer.mark
+    );
+    this.render.renderBoard(this.onClick, this.gamemaneger.board.blocks);
   }
 
   onClick = (e: MouseEvent) => {
@@ -20,8 +23,32 @@ export class Controller {
       y: Number(e.target.dataset["y"]),
     };
     this.gamemaneger.currentPlayer.setMark(position, this.gamemaneger.board);
-    this.gamemaneger.changePlayer();
-    this.render.displayName();
-    this.render.displayBoard(this.onClick, this.gamemaneger.board.blocks);
+    this.gamemaneger.togglePlayer();
+    this.render.renderName(
+      this.gamemaneger.currentPlayer.name,
+      this.gamemaneger.currentPlayer.mark
+    );
+    this.render.renderBoard(this.onClick, this.gamemaneger.board.blocks);
+    if (this.gamemaneger.checkThreeInARow()) {
+      setTimeout(
+        () =>
+          this.gamemaneger.endWithVictory(
+            () =>
+              this.render.renderBoard(
+                this.onClick,
+                this.gamemaneger.board.blocks
+              ),
+            `${this.gamemaneger.checkThreeInARow()?.name}`
+          ),
+        1000
+      );
+    }
+    setTimeout(
+      () =>
+        this.gamemaneger.endWithDraw(() =>
+          this.render.renderBoard(this.onClick, this.gamemaneger.board.blocks)
+        ),
+      1000
+    );
   };
 }
