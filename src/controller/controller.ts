@@ -22,8 +22,10 @@ export class Controller {
       x: Number(e.target.dataset["x"]),
       y: Number(e.target.dataset["y"]),
     };
-    this.gamemaneger.currentPlayer.setMark(position, this.gamemaneger.board);
-    this.gamemaneger.togglePlayer();
+    if (this.gamemaneger.board.getBlock(position).status === "") {
+      this.gamemaneger.currentPlayer.setMark(position, this.gamemaneger.board);
+      this.gamemaneger.togglePlayer();
+    }
     this.render.renderName(
       this.gamemaneger.currentPlayer.name,
       this.gamemaneger.currentPlayer.mark
