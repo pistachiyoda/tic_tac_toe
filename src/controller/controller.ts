@@ -35,22 +35,19 @@ export class Controller {
       setTimeout(
         () =>
           this.gamemaneger.endWithVictory(
-            () =>
-              this.render.renderBoard(
-                this.onClick,
-                this.gamemaneger.board.blocks
-              ),
+            (blocks) => this.render.renderBoard(this.onClick, blocks),
             `${this.gamemaneger.checkThreeInARow()?.name}`
           ),
-        1000
+        1
+      );
+    } else {
+      setTimeout(
+        () =>
+          this.gamemaneger.endWithDraw((blocks) =>
+            this.render.renderBoard(this.onClick, blocks)
+          ),
+        1
       );
     }
-    setTimeout(
-      () =>
-        this.gamemaneger.endWithDraw(() =>
-          this.render.renderBoard(this.onClick, this.gamemaneger.board.blocks)
-        ),
-      1000
-    );
   };
 }

@@ -1,5 +1,6 @@
 import { Player } from "./player.js";
 import { Board } from "./board.js";
+import { Block } from "./block.js";
 
 export class GameManager {
   players: Player[];
@@ -68,18 +69,18 @@ export class GameManager {
     this.board = new Board();
   };
 
-  endGame = (renderBoard: () => void, message: string) => {
+  endGame = (renderBoard: (blocks: Block[]) => void, message: string) => {
     if (confirm(`${message}!もう一回プレイしましょう！！`)) {
       this.init();
-      renderBoard();
+      renderBoard(this.board.blocks);
     }
   };
 
-  endWithVictory = (renderBoard: () => void, winner: string) => {
+  endWithVictory = (renderBoard: (blocks: Block[]) => void, winner: string) => {
     this.endGame(renderBoard, `${winner} が勝利しました`);
   };
 
-  endWithDraw = (renderBoard: () => void) => {
+  endWithDraw = (renderBoard: (blocks: Block[]) => void) => {
     if (
       this.board.blocks.filter(
         (block) => block.status !== "x" && block.status !== "○"
