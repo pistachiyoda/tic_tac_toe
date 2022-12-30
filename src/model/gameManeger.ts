@@ -38,6 +38,26 @@ export class GameManager {
         )
           return this.players[playerIndex];
       }
+
+      const diagonal1Blocks = [
+        this.board.blocks[0],
+        this.board.blocks[4],
+        this.board.blocks[8],
+      ];
+      const diagonal2Blocks = [
+        this.board.blocks[2],
+        this.board.blocks[4],
+        this.board.blocks[6],
+      ];
+      if (
+        diagonal1Blocks.every(
+          (block) => this.players[playerIndex].mark === block.status
+        ) ||
+        diagonal2Blocks.every(
+          (block) => this.players[playerIndex].mark === block.status
+        )
+      )
+        return this.players[playerIndex];
     }
     return null;
   };
